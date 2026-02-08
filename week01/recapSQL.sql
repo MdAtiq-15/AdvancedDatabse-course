@@ -51,33 +51,38 @@ CREATE TABLE Teach (
 );
 
 -- QUESTION 4b
-INSERT INTO Student VALUES (
-'1111111111','Anne Patel', '12 Northampton Square EC1V', 'F', 20, 'Peter Patel',
-'1111111112', 'John White', '15 Main Road, London, SW1', 'M', 21, 'Mary White',
-'1111111113', 'Tracy Blue', '20 High Street, London, SW4', 'F', 19, 'John Blue'
-);
+INSERT INTO Student VALUES
+('1111111111','Anne Patel', '12 Northampton Square EC1V', 'F', 20, 'Peter Patel'),
+('1111111112', 'John White', '15 Main Road, London, SW1', 'M', 21, 'Mary White'),
+('1111111113', 'Tracy Blue', '20 High Street, London, SW4', 'F', 19, 'John Blue');
 
-INSERT INTO Lecturer VALUES (
-'2222222222', 'Mary Brown', '16 Main Street, London N19', 'F', 40, 'A112', 8345,
-'2222222223', 'Peter Right', '20 High Street, London, SE13', 'M', 35, 'B145', 8456
-);
+INSERT INTO Lecturer VALUES 
+('2222222222', 'Mary Brown', '16 Main Street, London N19', 'F', 40, 'A112', 8345),
+('2222222223', 'Peter Right', '20 High Street, London, SE13', 'M', 35, 'B145', 8456);
 
-INSERT INTO Course VALUES (
-'IN3001', 'Advanced Databases', 'Introduction to Databases', 'A220',
-'INM370', 'Advanced Database Technologies', 'Object-Oriented Databases', 'A220',
-'IN3007', 'Final Year project', NULL, 'Great Hall'
-);
+INSERT INTO Course VALUES 
+('IN3001', 'Advanced Databases', 'Introduction to Databases', 'A220'),
+('INM370', 'Advanced Database Technologies', 'Object-Oriented Databases', 'A220'),
+('IN3007', 'Final Year project', NULL, 'Great Hall');
 
-INSERT INTO Registered VALUES (
-'1111111111', 'IN3001', 60,
-'1111111111', 'IN3007', 50,
-'1111111112', 'INM370', 72,
-'1111111113', 'IN3001', 65,
-'1111111113', 'IN3007', 70
-);
+INSERT INTO Registered VALUES 
+('1111111111', 'IN3001', 60),
+('1111111111', 'IN3007', 50),
+('1111111112', 'INM370', 72),
+('1111111113', 'IN3001', 65),
+('1111111113', 'IN3007', 70);
 
-INSERT INTO Teach VALUES (
-'2222222222', 'INM370', 'Thursday', '9:00-11:00 ', '2020',
-'2222222222', 'IN3001', 'Monday', '10:00-12:00', '2020',
-'2222222223', 'IN3007', 'Tuesday', '14:00-16:00', '2021'
-);
+INSERT INTO Teach VALUES 
+('2222222222', 'INM370', 'Thursday', '9:00-11:00 ', '2020'),
+('2222222222', 'IN3001', 'Monday', '10:00-12:00', '2020'),
+('2222222223', 'IN3007', 'Tuesday', '14:00-16:00', '2021');
+
+-- Question 4c
+SELECT COUNT (DISTINCT (StudentNum))
+FROM Registered
+WHERE CourseNum = 'C123';
+
+SELECT Lecturer.Name, COUNT(CourseNum)
+FROM Lecturer, Teach
+WHERE Lecturer.LectNum = Teach.LectNum
+GROUP BY Lecturer.LectNum, Lecturer.Name
